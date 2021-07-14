@@ -1,0 +1,527 @@
+{
+	"info": {
+		"_postman_id": "1ff50b74-7ea9-4b3a-bf10-410426b93bb5",
+		"name": "Kenna Data Exports",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Request Vulnerabilities Exports",
+			"item": [
+				{
+					"name": "RDE - All Vulnerabilities on All Assets",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"asset\" : {\r\n\t\t\"status\" : [\r\n\t\t\t\"active\",\r\n\t\t\t\"inactive\"\r\n\t\t]\r\n\t},\r\n\t\"status\" : [\r\n\t\t\"open\",\r\n\t\t\"closed\",\r\n\t\t\"risk accepted\",\r\n\t\t\"false positive\"\r\n\t],\r\n    \"export_settings\" : {\r\n        \"format\": \"json\",\r\n        \"model\": \"vulnerability\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{API_URL}}/data_exports",
+							"protocol": "https",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"data_exports"
+							],
+							"query": [
+								{
+									"key": "**Update in Body Tab",
+									"value": "See doc in Postman above for this call",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Filters client data by a given set of parameters the exact same way the search endpoints do. The request is processed in the background.\r\n\r\nUser must specify the format of the data, including the model type (\"asset\", \"vulnerability\", or \"fix\"), and data format (\"json\", \"xml\"). Due to the async nature of the request, a search_id is returned which can be used to get the results of the search once the processing of the request is complete. Search IDs are valid for 30 days after the initial request is made.\r\n\r\nFor a full list of query parameters to search by, see the search parameter section for your chosen model type."
+					},
+					"response": []
+				},
+				{
+					"name": "RDE - Vulnerabilities by Risk Meter ID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\" : [\"open\"], \r\n    \"search_id\" : \"252539\",\r\n    \"export_settings\" : {\r\n        \"format\": \"json\",\r\n        \"model\": \"vulnerability\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{API_URL}}/data_exports",
+							"protocol": "https",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"data_exports"
+							],
+							"query": [
+								{
+									"key": "**Update in Body Tab",
+									"value": "See doc in Postman above for this call",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RDE - Vulnerabilities by VulnID*",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"q\" :\"vulnerability_id:*1\",\r\n    \"export_settings\" : {\r\n        \"format\": \"json\",\r\n        \"model\": \"vulnerability\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{API_URL}}/data_exports",
+							"protocol": "https",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"data_exports"
+							],
+							"query": [
+								{
+									"key": "**Update in Body Tab",
+									"value": "See doc in Postman above for this call",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RDE - Vulnerabilities on Inactive Assets by VulnID* Chunks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"asset\" : {\r\n     \"status\" : [\r\n        \"inactive\"\r\n     ]\r\n    },\r\n    \"q\" :\"vulnerability_id:*7\",\r\n    \"export_settings\" : {\r\n        \"format\": \"json\",\r\n        \"model\": \"vulnerability\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{API_URL}}/data_exports",
+							"protocol": "https",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"data_exports"
+							],
+							"query": [
+								{
+									"key": "**Update in Body Tab",
+									"value": "See doc in Postman above for this call",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Incremental Data Export (Last Two Weeks)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\" : [\"open\"],\r\n    \"records_updated_since\" : \"now-2w\",\r\n    \"export_settings\" : {\r\n        \"format\": \"json\",\r\n        \"model\": \"vulnerability\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{API_URL}}/data_exports",
+							"protocol": "https",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"data_exports"
+							],
+							"query": [
+								{
+									"key": "**Update in Body Tab",
+									"value": "See doc in Postman above for this call",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This endpoint also takes the records_updated_since\r\nparameter to support incremental exports. It will fetch all records updated since that time. This can be added to both asset and vulnerabilities and will work with an offset(‘-2d’) or a timestamp(2020-09-09 00:00:00\r\n)\r\nNote: This value is tied to last_indexed_at which means that if your data was reindexed you would get the full data set in the next pull"
+					},
+					"response": []
+				},
+				{
+					"name": "Request Incremental Data Export (Timestamp)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\" : [\"open\"],\r\n    \"records_updated_since\" : \"2020-12-01 00:00:00\",\r\n    \"export_settings\" : {\r\n        \"format\": \"json\",\r\n        \"model\": \"vulnerability\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{API_URL}}/data_exports",
+							"protocol": "https",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"data_exports"
+							],
+							"query": [
+								{
+									"key": "**Update in Body Tab",
+									"value": "See doc in Postman above for this call",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This endpoint also takes the records_updated_since\r\nparameter to support incremental exports. It will fetch all records updated since that time. This can be added to both asset and vulnerabilities and will work with an offset(‘-2d’) or a timestamp(2020-09-09 00:00:00\r\n)\r\nNote: This value is tied to last_indexed_at which means that if your data was reindexed you would get the full data set in the next pull"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Request Assets Exports",
+			"item": [
+				{
+					"name": "RDE - All Assets",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"status\" : [\r\n        \"inactive\",\r\n        \"active\"\r\n     ],\r\n    \"exclude_child_filter\" : [\r\n        \"include all assets\"\r\n    ],\r\n    \"export_settings\" : {\r\n        \"format\": \"json\",\r\n        \"model\": \"asset\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{API_URL}}/data_exports",
+							"protocol": "https",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"data_exports"
+							],
+							"query": [
+								{
+									"key": "**Update {{id}} in the URL above (or variable) to reflect asset group ",
+									"value": "int32 (in path)",
+									"description": "Asset group id can be found in Kenna platform URL when risk meter is selected",
+									"disabled": true
+								}
+							]
+						},
+						"description": "By default only active assets with vulnerabilities associated with them will be exported. This request will include all assets regardless of status or the presence of vulnerabilities."
+					},
+					"response": []
+				},
+				{
+					"name": "RDE - Vulnerable Assets",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"asset\" : {\r\n     \"status\" : [\r\n        \"inactive\",\r\n        \"active\"\r\n     ]\r\n    },\r\n    \"export_settings\" : {\r\n        \"format\": \"json\",\r\n        \"model\": \"asset\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{API_URL}}/data_exports",
+							"protocol": "https",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"data_exports"
+							],
+							"query": [
+								{
+									"key": "**Update {{id}} in the URL above (or variable) to reflect asset group ",
+									"value": "int32 (in path)",
+									"description": "Asset group id can be found in Kenna platform URL when risk meter is selected",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RDE - Inactive Assets",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"status\" : [\r\n        \"inactive\"\r\n     ],\r\n    \"export_settings\" : {\r\n        \"format\": \"json\",\r\n        \"model\": \"asset\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{API_URL}}/data_exports",
+							"protocol": "https",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"data_exports"
+							],
+							"query": [
+								{
+									"key": "**Update {{id}} in the URL above (or variable) to reflect asset group ",
+									"value": "int32 (in path)",
+									"description": "Asset group id can be found in Kenna platform URL when risk meter is selected",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RDE - Vulnerable Assets Updated in Last Two Weeks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"asset\" : {\r\n     \"status\" : [\r\n        \"inactive\",\r\n        \"active\"\r\n     ]\r\n    },\r\n\t\"records_updated_since\" : \"now-2w\",\r\n    \"export_settings\" : {\r\n        \"format\": \"json\",\r\n        \"model\": \"asset\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{API_URL}}/data_exports",
+							"protocol": "https",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"data_exports"
+							],
+							"query": [
+								{
+									"key": "**Update {{id}} in the URL above (or variable) to reflect asset group ",
+									"value": "int32 (in path)",
+									"description": "Asset group id can be found in Kenna platform URL when risk meter is selected",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Request Fixes Exports",
+			"item": [
+				{
+					"name": "RDE - All Fixes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"asset\" : {\r\n     \"status\" : [\r\n        \"active\",\r\n        \"inactive\"\r\n     ]\r\n    },\r\n\t\"status\":[\r\n\t\t\"open\",\r\n\t\t\"closed\",\r\n\t\t\"risk accepted\",\r\n\t\t\"false positive\"\r\n\t],\r\n    \"export_settings\" : {\r\n        \"format\": \"json\",\r\n        \"model\": \"fix\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{API_URL}}/data_exports",
+							"protocol": "https",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"data_exports"
+							],
+							"query": [
+								{
+									"key": "**Update in Body Tab",
+									"value": "See doc in Postman above for this call",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Retrieve Data Export",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{API_URL}}/data_exports?search_id=int32",
+					"protocol": "https",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"data_exports"
+					],
+					"query": [
+						{
+							"key": "search_id",
+							"value": "int32",
+							"description": "Get all results from a previously created asynchronous search from search_id.  \nResponse data will be found in local gzip file"
+						}
+					]
+				},
+				"description": "Get all results from a previously created asynchronous search using the search_id.\r\n\r\nIf your search has not been completed you will receive an Export Incomplete Response to indicate that we are still processing your search results."
+			},
+			"response": []
+		},
+		{
+			"name": "Check Data Export Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{API_URL}}/data_exports/status?search_id=int32",
+					"protocol": "https",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"data_exports",
+						"status"
+					],
+					"query": [
+						{
+							"key": "search_id",
+							"value": "int32",
+							"description": "Get status of a previously created asynchronous search from search_id."
+						}
+					]
+				},
+				"description": "Get all results from a previously created asynchronous search using the search_id. This is useful for checking if a search is already in progress, failed, or expired."
+			},
+			"response": []
+		},
+		{
+			"name": "Kill Running Data Export",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://{{API_URL}}/data_exports/kill?export_id=int32",
+					"protocol": "https",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"data_exports",
+						"kill"
+					],
+					"query": [
+						{
+							"key": "export_id",
+							"value": "int32",
+							"description": "Get all results from a previously created asynchronous search (only use either export_id or Job_uuid)"
+						},
+						{
+							"key": "job_uuid",
+							"value": "string",
+							"description": "Get all results from a previously created asynchronous search (only use either export_id or Job_uuid)",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Kill a running export by specifying the export ID or the export's job UUID."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-Risk-Token",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{API_Key}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
